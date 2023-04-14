@@ -54,7 +54,6 @@ export function Board() {
         }
     }
 
-
     return (
         <>
             { !winner && (isTurnX ? 
@@ -68,7 +67,7 @@ export function Board() {
 
             <div className="grid grid-cols-3 grid-rows-3 w-96 h-96">
                 { cells.map( (cell, index) => {
-                    return <Cell 
+                    return <Cell
                             key={index} 
                             isTurnX={isTurnX} 
                             index={index} 

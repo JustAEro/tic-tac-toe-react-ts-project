@@ -6,6 +6,7 @@ const handleRestart = () => {
     window.location.reload();
 }
 
+
 export function RestartGameButton({ text }: RestartGameButtonProps) {
     return (
         <button 

@@ -1,13 +1,13 @@
 import cross from "../assets/cross-svgrepo-com.svg"
 import zero from "../assets/circle-svgrepo-com.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type CellProps = {
     isTurnX: boolean;
     index: number;
     handleChangeCellData: (index: number, owner: string) => void;
     winner: string;
-    isWinCell: boolean
+    isWinCell: boolean;
 };
 
 export function Cell({ isTurnX, index, handleChangeCellData, winner, isWinCell } : CellProps){

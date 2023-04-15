@@ -7,6 +7,7 @@ export function Board() {
     const [winner, setWinner] = useState("");
     const [cells, setCells] = useState(Array(9).fill(""));
     const [winCells, setWinCells] = useState(Array(3).fill(-1));
+    const [restartTrigger, setRestartTrigger] = useState(false);
 
     const checkWin = (cells: Array<string>) => {
         const winLines = [
@@ -54,6 +55,14 @@ export function Board() {
         }
     }
 
+    const handleRestart = () => {
+        setIsTurnX(true);
+        setWinner("");
+        setCells(Array(9).fill(""));
+        setWinCells(Array(3).fill(-1));
+        setRestartTrigger(prev => !prev);
+    }
+
     return (
         <>
             { !winner && (isTurnX ? 
@@ -73,13 +82,14 @@ export function Board() {
                             index={index} 
                             handleChangeCellData={handleChangeCellData}
                             winner={winner}
-                            isWinCell={ winCells.indexOf(index) === -1 ? false : true}
+                            isWinCell={ winCells.indexOf(index) === -1 ? false : true }
+                            restartTrigger={restartTrigger}
                             />                    
                     } )  
                 }
             </div>
 
-            {winner && <RestartGameButton text="Restart game" /> }
+            {winner && <RestartGameButton handleRestart={handleRestart} text="Restart game" /> }
         </>
     );
 }

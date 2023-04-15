@@ -8,10 +8,15 @@ type CellProps = {
     handleChangeCellData: (index: number, owner: string) => void;
     winner: string;
     isWinCell: boolean;
+    restartTrigger: boolean;
 };
 
-export function Cell({ isTurnX, index, handleChangeCellData, winner, isWinCell } : CellProps){
+export function Cell({ isTurnX, index, handleChangeCellData, winner, isWinCell, restartTrigger } : CellProps){
     const [owner, setOwner] = useState("");
+
+    useEffect(()=>{
+        setOwner(""); 
+    },[restartTrigger])
 
     const handleCellClick = () => {
         if (winner) {

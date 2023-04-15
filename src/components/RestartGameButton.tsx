@@ -1,13 +1,9 @@
 type RestartGameButtonProps = {
     text: string;
+    handleRestart: () => void;
 };
 
-const handleRestart = () => {
-    window.location.reload();
-}
-
-
-export function RestartGameButton({ text }: RestartGameButtonProps) {
+export function RestartGameButton({ text, handleRestart }: RestartGameButtonProps) {
     return (
         <button 
         className="bg-orange-400 p-4 rounded-md text-xl hover:shadow-md hover:shadow-orange-500" 

@@ -7,7 +7,6 @@ export function Board() {
     const [winner, setWinner] = useState("");
     const [cells, setCells] = useState(Array(9).fill(""));
     const [winCells, setWinCells] = useState(Array(3).fill(-1));
-    const [restartTrigger, setRestartTrigger] = useState(false);
 
     const checkWin = (cells: Array<string>) => {
         const winLines = [
@@ -55,12 +54,27 @@ export function Board() {
         }
     }
 
+    const handleCellClick = (index: number) => {
+        if (winner) {
+            return;
+        }
+        if (!cells[index]) {
+            let owner: string;
+            if (isTurnX) {
+                owner = "X";   
+            }
+            else {
+                owner = "0";
+            }
+            handleChangeCellData(index, owner);
+        }
+    }
+
     const handleRestart = () => {
         setIsTurnX(true);
         setWinner("");
         setCells(Array(9).fill(""));
         setWinCells(Array(3).fill(-1));
-        setRestartTrigger(prev => !prev);
     }
 
     return (
@@ -78,12 +92,11 @@ export function Board() {
                 { cells.map( (cell, index) => {
                     return <Cell
                             key={index} 
-                            isTurnX={isTurnX} 
-                            index={index} 
-                            handleChangeCellData={handleChangeCellData}
+                            index={index}
                             winner={winner}
+                            owner={cells[index]} 
+                            handleCellClick={handleCellClick}
                             isWinCell={ winCells.indexOf(index) === -1 ? false : true }
-                            restartTrigger={restartTrigger}
                             />                    
                     } )  
                 }
